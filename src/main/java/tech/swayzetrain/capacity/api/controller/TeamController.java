@@ -34,6 +34,11 @@ public class TeamController {
 	
 	private SharedUtility sharedUtility = new SharedUtility();
 	
+	@GetMapping
+	public ResponseEntity<List<Team>> getTeams() {
+		return teamReader.retrieveAllTeams();
+	}
+	
 	@GetMapping("/{teamId}")
 	public ResponseEntity<Team> getTeamByKey(@PathVariable("teamId") String teamId) {
 		return teamReader.retrieveTeamResponseByKey(sharedUtility.uuidFromString(teamId));
@@ -42,6 +47,11 @@ public class TeamController {
 	@GetMapping("/{teamId}/capacity")
 	public ResponseEntity<List<RoleCapacity>> getTeamRoleCapcityByKey(@PathVariable("teamId") String teamId) {
 		return teamCapacityService.getTeamRoleCapacity(sharedUtility.uuidFromString(teamId));
+	}
+	
+	@GetMapping("/{teamId}/capacity/summary")
+	public ResponseEntity<List<RoleCapacity>> getTeamRoleCapcitySummaryByKey(@PathVariable("teamId") String teamId) {
+		return teamCapacityService.getTeamRoleCapacitySummary(sharedUtility.uuidFromString(teamId));
 	}
 	
 	@PostMapping

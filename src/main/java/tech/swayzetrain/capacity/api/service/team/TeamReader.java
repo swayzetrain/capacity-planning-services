@@ -1,5 +1,6 @@
 package tech.swayzetrain.capacity.api.service.team;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,12 @@ public class TeamReader {
 		Team team = retrieveTeamByKey(teamId);
 		
 		return new ResponseEntity<>(team, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<List<Team>> retrieveAllTeams() {
+		List<Team> teams = teamRepository.findAll();
+		
+		return new ResponseEntity<>(teams, HttpStatus.OK);
 	}
 	
 }

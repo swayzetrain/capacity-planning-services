@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @Entity
 @Table(name = "Team_Member_Capacity")
 @JsonInclude(Include.NON_NULL)
-public class TeamMemberCapacity extends Capacity {
+public class TeamMemberCapacity extends DailyCapacity {
 
 	@Id
 	@GeneratedValue(generator = "UUID")

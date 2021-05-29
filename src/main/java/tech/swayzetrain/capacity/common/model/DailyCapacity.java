@@ -9,13 +9,22 @@ import javax.persistence.MappedSuperclass;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @MappedSuperclass
-public class Capacity {
+public class DailyCapacity {
+	
+	public DailyCapacity() {
+		
+	}
+	
+	public DailyCapacity(BigDecimal hours, LocalDate date) {
+		this.hours = hours;
+		this.date = date;
+	}
 
 	@Column(name = "Hours", columnDefinition = "NUMBER(4,2)")
 	private BigDecimal hours;
 
 	@JsonFormat(pattern="yyyy-MM-dd")
-	@Column(name = "Date", columnDefinition = "DATE")
+	@Column(name = "C_Date", columnDefinition = "DATE")
 	private LocalDate date;
 
 	public BigDecimal getHours() {

@@ -2,21 +2,17 @@ package tech.swayzetrain.capacity.common.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import tech.swayzetrain.capacity.common.enums.Role;
 
+@JsonInclude(Include.NON_NULL)
 public class RoleCapacity {
-	
-	public RoleCapacity() {
-		
-	}
-	
-	public RoleCapacity(Role role, List<Capacity> capacity) {
-		this.role = role;
-		this.capacity = capacity;
-	}
 
 	private Role role;
-	private List<Capacity> capacity;
+	private List<DailyCapacity> dailyCapacity;
+	private List<MonthlyCapacity> monthlyCapacity;
 
 	public Role getRole() {
 		return role;
@@ -26,12 +22,20 @@ public class RoleCapacity {
 		this.role = role;
 	}
 
-	public List<Capacity> getCapacity() {
-		return capacity;
+	public List<DailyCapacity> getDailyCapacity() {
+		return dailyCapacity;
 	}
 
-	public void setCapacity(List<Capacity> capacity) {
-		this.capacity = capacity;
+	public void setDailyCapacity(List<DailyCapacity> dailyCapacity) {
+		this.dailyCapacity = dailyCapacity;
+	}
+
+	public List<MonthlyCapacity> getMonthlyCapacity() {
+		return monthlyCapacity;
+	}
+
+	public void setMonthlyCapacity(List<MonthlyCapacity> monthlyCapacity) {
+		this.monthlyCapacity = monthlyCapacity;
 	}
 
 }

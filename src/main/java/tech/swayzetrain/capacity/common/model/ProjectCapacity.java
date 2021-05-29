@@ -23,7 +23,7 @@ import tech.swayzetrain.capacity.common.enums.Role;
 @Entity
 @Table(name = "Project_Capacity")
 @JsonInclude(Include.NON_NULL)
-public class ProjectCapacity extends Capacity {
+public class ProjectCapacity extends DailyCapacity {
 	
 	@Id
     @GeneratedValue(generator = "UUID")
