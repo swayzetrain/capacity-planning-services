@@ -40,7 +40,7 @@ public class TeamCapacityService {
 
 		Team team = teamReader.retrieveTeamByKey(teamId);
 
-		team.getTeamMembers().stream().forEach(teamMember -> {
+		team.getTeamMembers().stream().forEach(teamMember ->
 			teamMember.getTeamMemberCapacity().stream()
 			.filter(tmc -> null == startDate || tmc.getDate().compareTo(startDate) >= 0)
 			.filter(tmc -> null == endDate || tmc.getDate().compareTo(endDate) <= 0)
@@ -61,15 +61,14 @@ public class TeamCapacityService {
 					}
 				}
 
-				if (!dailyCapacityAdded) {
+				if (Boolean.FALSE.equals(dailyCapacityAdded)) {
 					DailyCapacity dailyCapacity = new DailyCapacity();
 					dailyCapacity.setHours(teamMemberCapacity.getHours());
 					dailyCapacity.setDate(teamMemberCapacity.getDate());
 
 					dailyCapacityList.add(dailyCapacity);
 				}
-			});
-		});
+			}));
 
 		return new ResponseEntity<>(roleCapacityList, HttpStatus.OK);
 	}
@@ -88,7 +87,7 @@ public class TeamCapacityService {
 		Team team = teamReader.retrieveTeamByKey(teamId);
 
 		
-		team.getTeamMembers().stream().forEach(teamMember -> {
+		team.getTeamMembers().stream().forEach(teamMember ->
 			teamMember.getTeamMemberCapacity().stream()
 			.filter(tmc -> null == startDate || tmc.getDate().compareTo(startDate) >= 0)
 			.filter(tmc -> null == endDate || tmc.getDate().compareTo(endDate) <= 0)
@@ -115,7 +114,7 @@ public class TeamCapacityService {
 					}
 				}
 
-				if (!monthlyRoleCapacityAdded) {
+				if (Boolean.FALSE.equals(monthlyRoleCapacityAdded)) {
 					MonthlyCapacity monthlyCapacity = new MonthlyCapacity();
 					monthlyCapacity.setHours(teamMemberCapacity.getHours());
 					monthlyCapacity.setDate(teamMemberCapacity.getDate().minusDays(teamMemberCapacity.getDate().getDayOfMonth()-1));
@@ -130,15 +129,14 @@ public class TeamCapacityService {
 					}
 				}
 				
-				if(!monthlyTeamCapacityAdded) {
+				if(Boolean.FALSE.equals(monthlyTeamCapacityAdded)) {
 					MonthlyCapacity monthlyCapacity = new MonthlyCapacity();
 					monthlyCapacity.setHours(teamMemberCapacity.getHours());
 					monthlyCapacity.setDate(teamMemberCapacity.getDate().minusDays(teamMemberCapacity.getDate().getDayOfMonth()-1));
 					
 					monthlyTeamCapacityList.add(monthlyCapacity);
 				}
-			});
-		});
+			}));
 
 		return new ResponseEntity<>(roleCapacityList, HttpStatus.OK);
 	}

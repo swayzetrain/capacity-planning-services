@@ -15,6 +15,6 @@ public interface TeamMemberCapacityRepository extends JpaRepository<TeamMemberCa
 	
 	public List<TeamMemberCapacity> findByTeamMemberOrderByDateAsc(TeamMember teamMember);
 	
-	public List<TeamMemberCapacity> findByTeamMemberAndDateBetweenOrderByDateAsc(TeamMember teamMember, LocalDate startDate, LocalDate EndDate);
+	public List<TeamMemberCapacity> findByTeamMemberAndDateBetweenOrderByDateAsc(TeamMember teamMember, LocalDate startDate, LocalDate endDate);
 
 }
