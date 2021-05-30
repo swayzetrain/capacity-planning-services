@@ -1,5 +1,6 @@
 package tech.swayzetrain.capacity.common.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,8 +11,10 @@ import tech.swayzetrain.capacity.common.model.TeamMemberCapacity;
 
 public interface TeamMemberCapacityRepository extends JpaRepository<TeamMemberCapacity, UUID> {
 	
-	public TeamMemberCapacity findByTeamMemberAndTeamMemberCapacityId(TeamMember teamMember, UUID teamMemberCapacityId);
+	public TeamMemberCapacity findByTeamMemberAndTeamMemberCapacityIdOrderByDateAsc(TeamMember teamMember, UUID teamMemberCapacityId);
 	
-	public List<TeamMemberCapacity> findByTeamMember(TeamMember teamMember);
+	public List<TeamMemberCapacity> findByTeamMemberOrderByDateAsc(TeamMember teamMember);
+	
+	public List<TeamMemberCapacity> findByTeamMemberAndDateBetweenOrderByDateAsc(TeamMember teamMember, LocalDate startDate, LocalDate EndDate);
 
 }

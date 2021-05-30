@@ -1,5 +1,6 @@
 package tech.swayzetrain.capacity.api.service.team;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +23,7 @@ public class TeamCapacityService {
 	@Autowired
 	private TeamReader teamReader;
 
-	public ResponseEntity<List<RoleCapacity>> getTeamRoleCapacity(UUID teamId) {
+	public ResponseEntity<List<RoleCapacity>> getTeamRoleCapacity(UUID teamId, LocalDate startDate, LocalDate endDate) {
 		List<RoleCapacity> roleCapacityList = Collections.synchronizedList(new ArrayList<>());
 
 		for (Role role : Role.values()) {
@@ -40,7 +41,10 @@ public class TeamCapacityService {
 		Team team = teamReader.retrieveTeamByKey(teamId);
 
 		team.getTeamMembers().stream().forEach(teamMember -> {
-			teamMember.getTeamMemberCapacity().stream().forEach(teamMemberCapacity -> {
+			teamMember.getTeamMemberCapacity().stream()
+			.filter(tmc -> null == startDate || tmc.getDate().compareTo(startDate) >= 0)
+			.filter(tmc -> null == endDate || tmc.getDate().compareTo(endDate) <= 0)
+			.forEach(teamMemberCapacity -> {
 				List<DailyCapacity> dailyCapacityList = null;
 				Boolean dailyCapacityAdded = false;
 
@@ -70,7 +74,7 @@ public class TeamCapacityService {
 		return new ResponseEntity<>(roleCapacityList, HttpStatus.OK);
 	}
 
-	public ResponseEntity<List<RoleCapacity>> getTeamRoleCapacitySummary(UUID teamId) {
+	public ResponseEntity<List<RoleCapacity>> getTeamRoleCapacitySummary(UUID teamId, LocalDate startDate, LocalDate endDate) {
 		List<RoleCapacity> roleCapacityList = Collections.synchronizedList(new ArrayList<>());
 		
 		for (Role role : Role.values()) {
@@ -85,7 +89,10 @@ public class TeamCapacityService {
 
 		
 		team.getTeamMembers().stream().forEach(teamMember -> {
-			teamMember.getTeamMemberCapacity().stream().forEach(teamMemberCapacity -> {
+			teamMember.getTeamMemberCapacity().stream()
+			.filter(tmc -> null == startDate || tmc.getDate().compareTo(startDate) >= 0)
+			.filter(tmc -> null == endDate || tmc.getDate().compareTo(endDate) <= 0)
+			.forEach(teamMemberCapacity -> {
 				List<MonthlyCapacity> monthlyCapacityList = null;
 				List<MonthlyCapacity> monthlyTeamCapacityList = null;
 				Boolean monthlyRoleCapacityAdded = false;
