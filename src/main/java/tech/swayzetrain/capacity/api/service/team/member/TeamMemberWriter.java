@@ -1,4 +1,4 @@
-package tech.swayzetrain.capacity.api.service.teammember;
+package tech.swayzetrain.capacity.api.service.team.member;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

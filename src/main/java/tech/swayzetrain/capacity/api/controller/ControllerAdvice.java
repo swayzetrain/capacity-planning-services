@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import tech.swayzetrain.capacity.common.enums.ErrorLevel;
+import tech.swayzetrain.capacity.common.exception.CapacityProcessingException;
 import tech.swayzetrain.capacity.common.exception.InvalidRequestParameterException;
 import tech.swayzetrain.capacity.common.exception.InvalidUUIDException;
 import tech.swayzetrain.capacity.common.exception.ObjectNotFoundException;
@@ -22,6 +23,11 @@ public class ControllerAdvice {
 	@ExceptionHandler({ InvalidUUIDException.class, InvalidRequestParameterException.class} )
 	public ResponseEntity<ErrorResponse> handleInvalidRequestException(RuntimeException ex) {
 		return new ResponseEntity<>(new ErrorResponse(ex.getMessage(), ErrorLevel.WARN), HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler({ CapacityProcessingException.class} )
+	public ResponseEntity<ErrorResponse> handleServiceProcessingException(RuntimeException ex) {
+		return new ResponseEntity<>(new ErrorResponse(ex.getMessage(), ErrorLevel.WARN), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }

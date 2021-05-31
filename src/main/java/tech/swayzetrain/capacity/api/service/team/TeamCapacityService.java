@@ -24,6 +24,8 @@ public class TeamCapacityService {
 
 	@Autowired
 	private TeamReader teamReader;
+	
+	private String capacityProcessingExceptionMessage = "Exception encountered when trying to build a capacity report for role, %s";
 
 	public ResponseEntity<List<RoleCapacity>> getTeamRoleCapacity(UUID teamId, LocalDate startDate, LocalDate endDate) {
 		List<RoleCapacity> roleCapacityList = Collections.synchronizedList(new ArrayList<>());
@@ -52,7 +54,7 @@ public class TeamCapacityService {
 				dailyCapacityList = getDailyCapacityByRole(roleCapacityList, teamMember.getRole());
 				
 				if(null == dailyCapacityList) {
-					throw new CapacityProcessingException(String.format("Exception encountered when trying to build a capacity report for role, %s", teamMember.getRole().toString()));
+					throw new CapacityProcessingException(String.format(capacityProcessingExceptionMessage, teamMember.getRole().toString()));
 				}
 				
 				addCapacityToDailyRoleCapacity(dailyCapacityList, teamMemberCapacity);
@@ -88,11 +90,11 @@ public class TeamCapacityService {
 				monthlyTeamCapacityList = getMonthlyCapacityByRole(roleCapacityList, Role.TEAM);
 				
 				if(null == monthlyCapacityList) {
-					throw new CapacityProcessingException(String.format("Exception encountered when trying to build a capacity report for role, %s", teamMember.getRole().toString()));
+					throw new CapacityProcessingException(String.format(capacityProcessingExceptionMessage, teamMember.getRole().toString()));
 				}
 				
 				if(null == monthlyTeamCapacityList) {
-					throw new CapacityProcessingException(String.format("Exception encountered when trying to build a capacity report for role, %s", Role.TEAM.toString()));
+					throw new CapacityProcessingException(String.format(capacityProcessingExceptionMessage, Role.TEAM.toString()));
 				}
 
 

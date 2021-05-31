@@ -1,4 +1,4 @@
-package tech.swayzetrain.capacity.api.service.teammember.capacity;
+package tech.swayzetrain.capacity.api.service.team.member.capacity;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import tech.swayzetrain.capacity.api.service.teammember.TeamMemberReader;
+import tech.swayzetrain.capacity.api.service.team.member.TeamMemberReader;
 import tech.swayzetrain.capacity.common.exception.InvalidRequestParameterException;
 import tech.swayzetrain.capacity.common.exception.ObjectNotFoundException;
 import tech.swayzetrain.capacity.common.model.TeamMember;

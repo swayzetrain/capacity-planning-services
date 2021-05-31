@@ -20,7 +20,7 @@ public class DailyCapacity {
 		this.date = date;
 	}
 
-	@Column(name = "Hours", columnDefinition = "NUMBER(4,2)")
+	@Column(name = "Hours", columnDefinition = "NUMBER(6,2)")
 	private BigDecimal hours;
 
 	@JsonFormat(pattern="yyyy-MM-dd")

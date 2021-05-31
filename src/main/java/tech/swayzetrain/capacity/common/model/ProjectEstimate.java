@@ -1,5 +1,7 @@
 package tech.swayzetrain.capacity.common.model;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -24,16 +26,16 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import tech.swayzetrain.capacity.common.enums.Role;
 
 @Entity
-@Table(name = "Project_Capacity")
+@Table(name = "Project_Estimate")
 @JsonInclude(Include.NON_NULL)
-public class ProjectCapacity extends DailyCapacity {
+public class ProjectEstimate {
 
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	@Null(groups = { New.class }, message = "projectCapacityId must be null for this transaction.")
-	@Column(name = "Project_Capacity_Id", columnDefinition = "VARCHAR2(36)", updatable = false, nullable = false)
-	private UUID projectCapacityId;
+	@Null(groups = { New.class }, message = "projectEstimateId must be null for this transaction.")
+	@Column(name = "Project_Estimate_Id", columnDefinition = "VARCHAR2(36)", updatable = false, nullable = false)
+	private UUID projectEstimateId;
 
 	@Null(groups = { New.class }, message = "project must be null for this transaction.")
 	@JsonBackReference
@@ -46,12 +48,24 @@ public class ProjectCapacity extends DailyCapacity {
 	@Column(name = "Role", columnDefinition = "VARCHAR2(25)")
 	private Role role;
 
-	public UUID getProjectCapacityId() {
-		return projectCapacityId;
+	@NotNull(groups = { New.class }, message = "hours must not be null for this transaction.")
+	@Column(name = "Hours", columnDefinition = "NUMBER(7,2)")
+	private BigDecimal hours;
+
+	@Null(groups = { New.class }, message = "createdDate must be null for this transaction.")
+	@Column(name = "Created_Date", columnDefinition = "TIMESTAMP(6)")
+	private LocalDateTime createdDate;
+
+	@Null(groups = { New.class }, message = "modifiedDate must be null for this transaction.")
+	@Column(name = "Modified_Date", columnDefinition = "TIMESTAMP(6)")
+	private LocalDateTime modifiedDate;
+
+	public UUID getProjectEstimateId() {
+		return projectEstimateId;
 	}
 
-	public void setProjectCapacityId(UUID projectCapacityId) {
-		this.projectCapacityId = projectCapacityId;
+	public void setProjectEstimateId(UUID projectEstimateId) {
+		this.projectEstimateId = projectEstimateId;
 	}
 
 	public Project getProject() {
@@ -69,7 +83,30 @@ public class ProjectCapacity extends DailyCapacity {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
+	public BigDecimal getHours() {
+		return hours;
+	}
+
+	public void setHours(BigDecimal hours) {
+		this.hours = hours;
+	}
+
+	public LocalDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(LocalDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public LocalDateTime getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(LocalDateTime modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
 	
 	public interface New{}
-
 }

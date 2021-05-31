@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import tech.swayzetrain.capacity.api.service.teammember.capacity.TeamMemberCapacityReader;
-import tech.swayzetrain.capacity.api.service.teammember.capacity.TeamMemberCapacityWriter;
+import tech.swayzetrain.capacity.api.service.team.member.capacity.TeamMemberCapacityReader;
+import tech.swayzetrain.capacity.api.service.team.member.capacity.TeamMemberCapacityWriter;
 import tech.swayzetrain.capacity.common.model.TeamMemberCapacity;
 import tech.swayzetrain.capacity.common.utility.SharedUtility;
 
