@@ -3699,3 +3699,19 @@ INSERT into Team_Member_Capacity (Team_Member_Capacity_Id, Team_Member_Id, Hours
 INSERT into Team_Member_Capacity (Team_Member_Capacity_Id, Team_Member_Id, Hours, C_Date, Modified_Date) VALUES (REPLACE(random_uuid(),'-',''), @Test4UUID, 7.5, '2021-12-29', CURRENT_TIMESTAMP);
 INSERT into Team_Member_Capacity (Team_Member_Capacity_Id, Team_Member_Id, Hours, C_Date, Modified_Date) VALUES (REPLACE(random_uuid(),'-',''), @Test4UUID, 7.5, '2021-12-30', CURRENT_TIMESTAMP);
 INSERT into Team_Member_Capacity (Team_Member_Capacity_Id, Team_Member_Id, Hours, C_Date, Modified_Date) VALUES (REPLACE(random_uuid(),'-',''), @Test4UUID, 7.5, '2021-12-31', CURRENT_TIMESTAMP);
+
+SET @Project1UUID = '40ef719c2b4747fdb38dd869d89e0531';
+SET @Project2UUID = 'ff63e0da84a44bdb822f06cf9d6cb3b0';
+
+INSERT into Project (Project_Id, Name, Created_Date, Modified_Date) VALUES (@Project1UUID, 'Project 1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT into Project (Project_Id, Name, Created_Date, Modified_Date) VALUES (@Project2UUID, 'Project 2', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT into Project_Estimate (Project_Estimate_Id, Project_Id, Role, Hours, Created_Date, Modified_Date) VALUES (REPLACE(random_uuid(),'-',''), @Project1UUID, 'SCRUM', 50, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT into Project_Estimate (Project_Estimate_Id, Project_Id, Role, Hours, Created_Date, Modified_Date) VALUES (REPLACE(random_uuid(),'-',''), @Project1UUID, 'REQUIREMENTS_ANALYST', 100, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT into Project_Estimate (Project_Estimate_Id, Project_Id, Role, Hours, Created_Date, Modified_Date) VALUES (REPLACE(random_uuid(),'-',''), @Project1UUID, 'DEVELOPER', 500, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT into Project_Estimate (Project_Estimate_Id, Project_Id, Role, Hours, Created_Date, Modified_Date) VALUES (REPLACE(random_uuid(),'-',''), @Project1UUID, 'QUALITY_ENGINEER', 200, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT into Project_Estimate (Project_Estimate_Id, Project_Id, Role, Hours, Created_Date, Modified_Date) VALUES (REPLACE(random_uuid(),'-',''), @Project2UUID, 'SCRUM', 25, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT into Project_Estimate (Project_Estimate_Id, Project_Id, Role, Hours, Created_Date, Modified_Date) VALUES (REPLACE(random_uuid(),'-',''), @Project2UUID, 'REQUIREMENTS_ANALYST', 150, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT into Project_Estimate (Project_Estimate_Id, Project_Id, Role, Hours, Created_Date, Modified_Date) VALUES (REPLACE(random_uuid(),'-',''), @Project2UUID, 'DEVELOPER', 800, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT into Project_Estimate (Project_Estimate_Id, Project_Id, Role, Hours, Created_Date, Modified_Date) VALUES (REPLACE(random_uuid(),'-',''), @Project2UUID, 'QUALITY_ENGINEER', 350, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
