@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,8 +41,13 @@ public class TeamMemberController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TeamMember> createTeamMember(@PathVariable("teamId") String teamId, @Validated(TeamMember.New.class) @RequestBody TeamMember teamMember) {
+	public ResponseEntity<TeamMember> postTeamMember(@PathVariable("teamId") String teamId, @Validated(TeamMember.New.class) @RequestBody TeamMember teamMember) {
 		return teamMemberWriter.createTeamMember(sharedUtility.uuidFromString(teamId), teamMember);
+	}
+	
+	@PatchMapping("/{teamMemberId}")
+	public ResponseEntity<TeamMember> patchTeamMember(@PathVariable("teamId") String teamId, @PathVariable("teamMemberId") String teamMemberId, @Validated(TeamMember.Update.class) @RequestBody TeamMember teamMember) {
+		return teamMemberWriter.updateExistingTeamMember(sharedUtility.uuidFromString(teamId), sharedUtility.uuidFromString(teamMemberId), teamMember);
 	}
 
 }

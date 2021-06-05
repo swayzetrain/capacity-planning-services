@@ -27,6 +27,7 @@ public class TeamMemberCapacity extends DailyCapacity {
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	@Null(groups = { New.class }, message = "teamMemberCapacityId must be null for this transaction")
 	@Column(name = "Team_Member_Capacity_Id", columnDefinition = "VARCHAR2(36)", updatable = false, nullable = false)
 	private UUID teamMemberCapacityId;
 
@@ -36,7 +37,7 @@ public class TeamMemberCapacity extends DailyCapacity {
 	private TeamMember teamMember;
 
 	@Column(name = "Modified_Date", columnDefinition = "TIMESTAMP(6)")
-	@Null(groups = { New.class }, message = "modifiedDate must be null for this transaction.")
+	@Null(groups = { New.class }, message = "modifiedDate must be null for this transaction")
 	private LocalDateTime modifiedDate;
 
 	public UUID getTeamMemberCapacityId() {

@@ -9,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import tech.swayzetrain.capacity.api.service.team.TeamReader;
+import tech.swayzetrain.capacity.common.model.Team;
 import tech.swayzetrain.capacity.common.model.TeamMember;
 import tech.swayzetrain.capacity.common.repository.TeamMemberRepository;
+import tech.swayzetrain.capacity.common.utility.SharedUtility;
 
 @Service
 public class TeamMemberWriter {
@@ -21,6 +23,8 @@ public class TeamMemberWriter {
 	@Autowired
 	private TeamReader teamReader;
 	
+	private SharedUtility sharedUtility = new SharedUtility();
+	
 	public ResponseEntity<TeamMember> createTeamMember(UUID teamId, TeamMember teamMember) {
 		teamMember.setTeam(teamReader.retrieveTeamByKey(teamId));
 		
@@ -30,6 +34,20 @@ public class TeamMemberWriter {
 		TeamMember persistedTeamMember = teamMemberRepository.save(teamMember);
 		
 		return new ResponseEntity<>(persistedTeamMember, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<TeamMember> updateExistingTeamMember(UUID teamId, UUID teamMemberId, TeamMember updatedTeamMember) {
+		Team team = teamReader.retrieveTeamByKey(teamId);
+		
+		TeamMember existingTeamMember = teamMemberRepository.findByTeamMemberIdAndTeam(teamMemberId, team);
+		
+		sharedUtility.copyNonNullProperties(updatedTeamMember, existingTeamMember);
+		
+		existingTeamMember.setModifiedDate(LocalDateTime.now());
+		
+		teamMemberRepository.save(existingTeamMember);
+		
+		return new ResponseEntity<>(existingTeamMember, HttpStatus.OK);
 	}
 
 }

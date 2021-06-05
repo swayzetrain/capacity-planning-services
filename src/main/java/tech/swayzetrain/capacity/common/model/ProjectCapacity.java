@@ -31,17 +31,17 @@ public class ProjectCapacity extends DailyCapacity {
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	@Null(groups = { New.class }, message = "projectCapacityId must be null for this transaction.")
+	@Null(groups = { New.class }, message = "projectCapacityId must be null for this transaction")
 	@Column(name = "Project_Capacity_Id", columnDefinition = "VARCHAR2(36)", updatable = false, nullable = false)
 	private UUID projectCapacityId;
 
-	@Null(groups = { New.class }, message = "project must be null for this transaction.")
+	@Null(groups = { New.class }, message = "project must be null for this transaction")
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Project_Id")
 	private Project project;
 
-	@NotNull(groups = { New.class }, message = "role must not be null for this transaction.")
+	@NotNull(groups = { New.class }, message = "role must not be null for this transaction")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "Role", columnDefinition = "VARCHAR2(25)")
 	private Role role;

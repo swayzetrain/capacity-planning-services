@@ -27,25 +27,25 @@ public class Team {
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	@Null(groups= {New.class}, message = "teamId must be null for this transaction.")
+	@Null(groups= {New.class}, message = "teamId must be null for this transaction")
 	@Column(name = "Team_Id", columnDefinition = "VARCHAR2(36)", updatable = false, nullable = false)
 	private UUID teamId;
 
-	@NotNull(groups= {New.class}, message = "name must not be null for this transaction.")
+	@NotNull(groups= {New.class}, message = "name must not be null for this transaction")
 	@Column(name = "Name", columnDefinition = "VARCHAR2(75)")
 	private String name;
 
-	@Null(groups= {New.class}, message = "teamMembers must be null for this transaction.")
+	@Null(groups= {New.class}, message = "teamMembers must be null for this transaction")
 	@JsonManagedReference
 	@OneToMany(mappedBy = "team")
 	private List<TeamMember> teamMembers;
 
 	@Column(name = "Created_Date", columnDefinition = "TIMESTAMP(6)")
-	@Null(groups= {New.class}, message = "createdDate must be null for this transaction.")
+	@Null(groups= {New.class}, message = "createdDate must be null for this transaction")
 	private LocalDateTime createdDate;
 
 	@Column(name = "Modified_Date", columnDefinition = "TIMESTAMP(6)")
-	@Null(groups= {New.class}, message = "modifiedDate must be null for this transaction.")
+	@Null(groups= {New.class}, message = "modifiedDate must be null for this transaction")
 	private LocalDateTime modifiedDate;
 
 	public UUID getTeamId() {

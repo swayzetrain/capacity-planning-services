@@ -29,7 +29,7 @@ public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
     HttpServletResponse response = (HttpServletResponse) res;
 
     response.setHeader("Access-Control-Allow-Origin", "*");
-    response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
     response.setHeader("Access-Control-Max-Age", "3600");
     response.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER,Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");
     response.addHeader("Access-Control-Expose-Headers", "xsrf-token");

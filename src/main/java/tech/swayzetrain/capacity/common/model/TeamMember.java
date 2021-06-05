@@ -35,15 +35,15 @@ public class TeamMember {
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	@Null(groups= {New.class}, message = "teamMemberId must be null for this transaction.")
+	@Null(groups= {New.class, Update.class}, message = "teamMemberId must be null for this transaction")
 	@Column(name = "Team_Member_Id", columnDefinition = "VARCHAR2(36)", updatable = false, nullable = false)
 	private UUID teamMemberId;
 
-	@NotNull(groups= {New.class}, message = "name must not be null for this transaction.")
+	@NotNull(groups= {New.class}, message = "name must not be null for this transaction")
 	@Column(name = "Name", columnDefinition = "VARCHAR2(75)")
 	private String name;
 
-	@NotNull(groups= {New.class}, message = "role must not be null for this transaction.")
+	@NotNull(groups= {New.class}, message = "role must not be null for this transaction")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "Role", columnDefinition = "VARCHAR2(25)")
 	private Role role;
@@ -52,17 +52,17 @@ public class TeamMember {
 	@OneToMany(mappedBy = "teamMember")
 	private List<TeamMemberCapacity> teamMemberCapacity;
 
-	@Null(groups= {New.class}, message = "team must be null for this transaction.")
+	@Null(groups= {New.class, Update.class}, message = "team must be null for this transaction")
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Team_Id")
 	private Team team;
 
-	@Null(groups= {New.class}, message = "createdDate must be null for this transaction.")
+	@Null(groups= {New.class, Update.class}, message = "createdDate must be null for this transaction")
 	@Column(name = "Created_Date", columnDefinition = "TIMESTAMP(6)")
 	private LocalDateTime createdDate;
 
-	@Null(groups= {New.class}, message = "modifiedDate must be null for this transaction.")
+	@Null(groups= {New.class, Update.class}, message = "modifiedDate must be null for this transaction")
 	@Column(name = "Modified_Date", columnDefinition = "TIMESTAMP(6)")
 	private LocalDateTime modifiedDate;
 
@@ -123,4 +123,6 @@ public class TeamMember {
 	}
 
 	public interface New{}
+	
+	public interface Update{}
 }

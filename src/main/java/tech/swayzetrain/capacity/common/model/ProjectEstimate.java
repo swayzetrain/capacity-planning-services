@@ -33,30 +33,30 @@ public class ProjectEstimate {
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-	@Null(groups = { New.class }, message = "projectEstimateId must be null for this transaction.")
+	@Null(groups = { New.class }, message = "projectEstimateId must be null for this transaction")
 	@Column(name = "Project_Estimate_Id", columnDefinition = "VARCHAR2(36)", updatable = false, nullable = false)
 	private UUID projectEstimateId;
 
-	@Null(groups = { New.class }, message = "project must be null for this transaction.")
+	@Null(groups = { New.class }, message = "project must be null for this transaction")
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Project_Id")
 	private Project project;
 
-	@NotNull(groups = { New.class }, message = "role must not be null for this transaction.")
+	@NotNull(groups = { New.class }, message = "role must not be null for this transaction")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "Role", columnDefinition = "VARCHAR2(25)")
 	private Role role;
 
-	@NotNull(groups = { New.class }, message = "hours must not be null for this transaction.")
+	@NotNull(groups = { New.class }, message = "hours must not be null for this transaction")
 	@Column(name = "Hours", columnDefinition = "NUMBER(7,2)")
 	private BigDecimal hours;
 
-	@Null(groups = { New.class }, message = "createdDate must be null for this transaction.")
+	@Null(groups = { New.class }, message = "createdDate must be null for this transaction")
 	@Column(name = "Created_Date", columnDefinition = "TIMESTAMP(6)")
 	private LocalDateTime createdDate;
 
-	@Null(groups = { New.class }, message = "modifiedDate must be null for this transaction.")
+	@Null(groups = { New.class }, message = "modifiedDate must be null for this transaction")
 	@Column(name = "Modified_Date", columnDefinition = "TIMESTAMP(6)")
 	private LocalDateTime modifiedDate;
 
